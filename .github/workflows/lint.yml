@@ -1,0 +1,23 @@
+
+name: eslint
+
+on: 
+    push: 
+        branches: [master]
+    pull_request:
+        branches: [master]
+
+jobs: 
+  run-linters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # клонируем репу, используя гитхаб экшенс
+      - uses: dcodeIO/setup-node-nvm@master
+        with:
+          node-version: lts/*
+      - name: install dependencies
+        run: npm ci
+      - name: lint
+        run: npm run lint
+
+
